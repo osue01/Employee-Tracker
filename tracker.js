@@ -1,4 +1,4 @@
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const table = require("console.table");
 
@@ -6,8 +6,8 @@ let connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
   user: "root",
-  password: "",
-  database: "workDB",
+  password: "password",
+  database: "workdb",
 });
 
 connection.connect(function (err) {
@@ -18,7 +18,7 @@ connection.connect(function (err) {
 
 function askQuestions() {
   inquirer
-    .createPromptModule({
+    .prompt({
       message: "what would you like to do?",
       type: "list",
       choices: [
@@ -82,7 +82,7 @@ function viewDepartments() {
 
 function addEmployee() {
   inquirer
-    .createPromptModule([
+    .prompt([
       {
         type: "input",
         name: "firstName",
